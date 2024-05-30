@@ -62,6 +62,15 @@ public class Jumppad : MonoBehaviour
 
 아래와같은 스크립트를 사용했습니다.
 
+인스펙터창에 등록할 버프 아이콘
+```cs
+<C#>
+    [Header("SpeedBuff")]
+    [SerializeField] private GameObject BuffIcon;
+    [SerializeField] private TextMeshProUGUI VelueText;
+```
+
+이동속도 버프를 활성화하는 스크립트
 ```cs
 <C#>
  PlayerCondition.cs
@@ -84,3 +93,20 @@ public class Jumppad : MonoBehaviour
     }
 ```
 
+---
+
+추가로 위의 구현사항을 구현함에 있어서 약간의 시행착오가 있었습니다.
+
+처음에 코루틴을 UIInventory.cs에 작성했었는데,
+
+UIInventory.cs가 등록된 인벤토리창 UI가 비활성화될 때 이 곳에 작성된 코루틴이 같이 비활성화되는 문제가 있었습니다.
+
+그래서 결과적으로 해당 코루틴을 PlayerCondition.cs로 넘기는 것으로 간단히 해결하였는데,
+
+이로 인해 해당 코루틴이 등록된 오브젝트가 비활성화 될 때 코루틴이 중단된다는 것을 알게되었고,
+
+아이템의 사용을 결정하는 기능과 아이템의 효과를 정의하는 기능을 다른 스크립트에 분리해두게 된 이유를 알게 되었습니다.
+
+---
+
+이상입니다.
