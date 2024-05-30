@@ -194,7 +194,7 @@ public class UIInventory : MonoBehaviour
                     case ConsumableType.Helth:
                         condition.Heal(selectedItem.consumables[i].value);
                         break;
-                    case ConsumableType.Hunger:
+                    case ConsumableType.Stamina:
                         condition.Eat(selectedItem.consumables[i].value);
                         break;
                 }
