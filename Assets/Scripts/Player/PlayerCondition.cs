@@ -1,5 +1,8 @@
 using System;
+using System.Collections;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public interface IDamagable
 {
@@ -14,6 +17,10 @@ public class PlayerCondition : MonoBehaviour, IDamagable
     Condition stamina { get { return uiCondition.stamina; } }
 
     public event Action onTakeDamage;
+
+    [Header("SpeedBuff")]
+    [SerializeField] private GameObject BuffIcon;
+    [SerializeField] private TextMeshProUGUI VelueText;
 
     void Update()
     {
@@ -33,6 +40,22 @@ public class PlayerCondition : MonoBehaviour, IDamagable
     public void Eat(float amount)
     {
         stamina.Add(amount);
+    }
+    public void SpeedBuff(float speed)
+    {
+        StartCoroutine(SpeedUp(speed));
+    }
+    IEnumerator SpeedUp(float value)
+    {
+        CharacterManager.Instance.Player.controller.moveSpeed += value;
+        BuffIcon.SetActive(true);
+        VelueText.text = "+ " + value;
+        Debug.Log("Ω√¿€");
+        yield return new WaitForSeconds(10);
+        BuffIcon.SetActive(false);
+        CharacterManager.Instance.Player.controller.moveSpeed -= value;
+        VelueText.text = "+ " + 0;
+        Debug.Log("≥°");
     }
 
     private void Die()

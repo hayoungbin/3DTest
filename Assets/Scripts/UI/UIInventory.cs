@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -196,6 +197,9 @@ public class UIInventory : MonoBehaviour
                         break;
                     case ConsumableType.Stamina:
                         condition.Eat(selectedItem.consumables[i].value);
+                        break;
+                    case ConsumableType.SpeedBuff:
+                        condition.SpeedBuff(selectedItem.consumables[i].value);
                         break;
                 }
             }

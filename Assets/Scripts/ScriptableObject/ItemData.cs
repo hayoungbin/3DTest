@@ -11,7 +11,8 @@ public enum ItemType
 public enum ConsumableType
 {
     Helth,
-    Stamina
+    Stamina,
+    SpeedBuff
 }
 
 [Serializable]
