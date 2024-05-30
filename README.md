@@ -39,3 +39,48 @@ public class Jumppad : MonoBehaviour
 ```
 
 ![image](https://github.com/hayoungbin/3DTest/assets/167050593/66a8b014-934b-4b05-9b4f-7990d46a8187)
+
+닿으면 위와 같이 높이 점프합니다.
+
+---
+
+## 필수 요구사항 6 : 아이템 사용, 선택 요구사항 1 : 추가UI, 선택 요구사항 5 : 다양한 아이템 구현
+
+우선, 필수 요구사항 6을 위해 선택요구사항 5의 추가적인 아이템 구현을 먼저 하기로 했습니다.
+
+![image](https://github.com/hayoungbin/3DTest/assets/167050593/9f4adb0b-9957-4a49-9d44-117db2546275)
+
+새로운 아이템인 사과입니다.
+
+![image](https://github.com/hayoungbin/3DTest/assets/167050593/89c6b511-79d1-40e9-a80c-0bf40bd347a6)
+
+강의자료에 달리 아이콘이 없길래 기본 원형 스프라이트를 윈도우 기본 편집기로 수정해서 만들었습니다.
+
+![image](https://github.com/hayoungbin/3DTest/assets/167050593/a4804d73-2522-4c79-9384-6509072ac8d9)
+
+사과를 사용할 경우 10초동안 이동속도가 10 증가하며, 화면 아래에 버프 아이콘이 생깁니다.
+
+아래와같은 스크립트를 사용했습니다.
+
+```cs
+<C#>
+ PlayerCondition.cs
+
+    public void SpeedBuff(float speed)
+    {
+        StartCoroutine(SpeedUp(speed));
+    }
+    IEnumerator SpeedUp(float value)
+    {
+        CharacterManager.Instance.Player.controller.moveSpeed += value;
+        BuffIcon.SetActive(true);
+        VelueText.text = "+ " + value;
+        Debug.Log("시작");
+        yield return new WaitForSeconds(10);
+        BuffIcon.SetActive(false);
+        CharacterManager.Instance.Player.controller.moveSpeed -= value;
+        VelueText.text = "+ " + 0;
+        Debug.Log("끝");
+    }
+```
+
